@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var arr = [{
+            name: 'xiaoming',
+            age: 18
+        }, {
+            name: 'zhangsan',
+            age: 34
+        }, {
+            name: 'lisi',
+            age: 29
+        }, {
+            name: 'wangwu',
+            age: 24
+        }];
+
+        function sortby(key, way = true) {
+            if (way === true) {
+                return function(a, b) {
+                    var value1 = a[key];
+                    var value2 = b[key];
+                    return value1 - value2;
+                }
+            } else {
+                return function(a, b) {
+                    var value1 = a[key];
+                    var value2 = b[key];
+                    if (value1 > value2)
+                        return -1;
+                    else if (value1 < value2)
+                        return 1;
+                    else
+                        return 0;
+                }
+            }
+
+        }
+
+        //console.log(arr.sort(sortby("age"))); //[{name: "xiaoming", age: 18},{name: "wangwu", age: 24},{name: "lisi", age: 29},{name: "zhangsan", age: 34}]
+        console.log(arr.sort(sortby("name", false))); //[{name: "zhangsan", age: 34},{name: "xiaoming", age: 18},{name: "wangwu", age: 24},{name: "lisi", age: 29}]
+
+        //因为浏览器console.log输出引用的原因，测试的时候可以将另一句不用的console语句注释起来，避免对测试结果产生影响
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

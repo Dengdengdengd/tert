@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var message = prompt("请输入一个数字");
+        var flag = parseFloat(message);
+        while (!flag) {
+            message = prompt("输入的不是数字，请重新输入");
+            flag = parseFloat(message);
+        }
+        alert("你输入的数字平方后:" + flag * flag);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
