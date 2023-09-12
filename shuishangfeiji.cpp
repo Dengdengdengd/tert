@@ -22,7 +22,8 @@ class PLANE : virtual public CRAFT{
     protected:
         double width;
     public:
-        PLANE(double speed, double width):CRAFT(speed),width(width){
+        PLANE(double speed, double width):CRAFT(speed){
+            this->width=width;
             cout<<"创建飞机(翼展: "<<width<<")"<<endl;
         }
         ~PLANE(){
@@ -37,7 +38,8 @@ class SHIP : virtual public CRAFT{
     protected:
         double depth;
     public:
-        SHIP(double speed, double depth):CRAFT(speed),depth(depth){
+        SHIP(double speed, double depth):CRAFT(speed){
+            this->depth=depth;
             cout<<"创建船(吃水: "<<depth<<")"<<endl;
         }
         ~SHIP(){
