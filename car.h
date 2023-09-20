@@ -6,8 +6,38 @@
 #include <vector>
 using namespace std;
 
-class Chassis {
+// 主题接口
+class RadarSubject {
 public:
+    virtual void addObserver(class ChassisObserver* observer) = 0;
+    virtual void removeObserver(class ChassisObserver* observer) = 0;
+    virtual void notifyObservers(int obstacleState) = 0;
+};
+
+// 观察者接口
+class ChassisObserver {
+public:
+    virtual void update(int obstacleState) = 0;
+};
+
+class Chassis : public ChassisObserver {
+public:
+     void update(int obstacleState) override {
+        switch (obstacleState) {
+            case 1:
+                cout << "障碍物在前方，执行后退操作" << endl;
+                break;
+            case 2:
+                cout << "障碍物在右前方，执行左转操作" << endl;
+                break;
+            case 3:
+                cout << "障碍物在左前方，执行右转操作" << endl;
+                break;
+            default:
+                cout << "未检测到障碍物" << endl;
+                break;
+        }
+    }
     string id;
     string type = "SCOUT MINI";
     string wheelbase = "451mm";
@@ -141,13 +171,34 @@ public:
     }
 };
 
-class LiDAR {
+class LiDAR : public RadarSubject {
+private:
+    vector<class ChassisObserver*> observers;
+    int obstacleState;
 public:
     string model = "RS-Helios-16p";
     int numChannels = 16;
     double testRange = 100.0;
     double powerConsumption = 8.0;
+    void addObserver(ChassisObserver* observer) override {
+        observers.push_back(observer);
+    }
 
+    void removeObserver(ChassisObserver* observer) override {
+        // 在实际应用中可能需要实现移除观察者的逻辑
+    }
+
+    void notifyObservers(int obstacleState) override {
+        for (ChassisObserver* observer : observers) {
+            observer->update(obstacleState);
+        }
+    }
+
+    // 模拟雷达检测障碍物
+    void detectObstacle(int state) {
+        obstacleState = state;
+        notifyObservers(obstacleState);
+    }
     void setLiDARDetails(const string& model, int numChannels, double testRange, double powerConsumption) {
         this->model = model;
         this->numChannels = numChannels;

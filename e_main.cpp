@@ -139,6 +139,19 @@ vector<Student> loadStudentsFromFile() {
 int main() {
     vector<Car> cars;
     vector<Student> students;
+     LiDAR radar; // 创建多线激光雷达对象
+
+    Chassis chassis; // 创建底盘模块对象
+
+    // 注册底盘模块为雷达的观察者
+    radar.addObserver(&chassis);
+
+    int obstacleState;
+    cout << "请输入障碍物状态（1: 前方, 2: 右前方, 3: 左前方, 0: 无障碍）: ";
+    cin >> obstacleState;
+
+    // 模拟雷达检测到障碍物并通知底盘模块
+    radar.detectObstacle(obstacleState);
 	for(int i=0;i<10;i++){
     // Load existing data from files
 //    cars = loadCarsFromFile();
