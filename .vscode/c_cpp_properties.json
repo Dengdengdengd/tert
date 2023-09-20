@@ -3,7 +3,8 @@
         {
             "name": "Win64",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "D:/vscode_c++file"
             ],
             "defines": [
                 "_DEBUG",
